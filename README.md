@@ -12,9 +12,7 @@ Once the data was cleaned, it was split into training and testing categories, wh
 - y_train
 - y_test
 
-A random_state of 1 was used across all models to ensure reproducible.
-
-The balance of low_risk and high_risk is unbalanced, but this was expected as credit risk is an inherently unbalanced classification problem, since good loans easily outnumber risky loans.
+A random_state of 1 was used across all models to ensure reproducible results.  The balance of low_risk and high_risk is unbalanced, but this was expected as credit risk is an inherently unbalanced classification problem, since good loans easily outnumber risky loans.
 
 ![01-dataset](https://github.com/ASCHEET/Credit_Risk_Analysis/blob/main/Resources/01-Balance%20of%20Dataset.png?raw=true)
 
@@ -28,9 +26,7 @@ Unbalanced                |  Balanced
 
 Once the datasets were balanced, the model trained the data, which is where the algorithm analyzes the data and attempts to learn patterns in the data.
 
-Naive random oversampling on this data gave the following scores:
-
-Balanced Accuracy: 0.6287
+Naive random oversampling on this data gave the following scores: Balanced Accuracy: 0.6287
 
 ![04-imbalanced_class_report](https://github.com/ASCHEET/Credit_Risk_Analysis/blob/main/Resources/04-imbalanced_class_report.png?raw=true)
 
@@ -42,11 +38,9 @@ An average recall score of 0.64 means that this model quantified the number of p
 
 
 #### SMOTE Oversampling
-In the Synthetic Minority Oversampling Technique (SMOTE) oversampling model, the minority class (high_risk) are duplicated prior to fitting the model.  This can balanced class distribution, but does not provide any additional information to the model.  SMOTE selects data points that are close in the feature space, drawing a line between the points in the feature space, and drawing a new sample at a point along that line.  Realistic data from high_risk are created , which are relatively close to existing data from high_risk.
+In the Synthetic Minority Oversampling Technique (SMOTE) oversampling model, the minority class (high_risk) are duplicated prior to fitting the model.  This can balanced class distribution, but does not provide any additional information to the model.  SMOTE selects data points that are close in the feature space, drawing a line between the points in the feature space, and drawing a new sample at a point along that line.  Realistic data from high_risk are created, which are relatively close to existing data from high_risk.
 
-Once the data were balanced and trained, SMOTE oversampling gave the following scores:
-
-Balanced Accuracy: 0.612
+Once the data was balanced and trained, SMOTE oversampling gave the following scores:  Balanced Accuracy: 0.612
 
 ![05-smote_class_report](https://github.com/ASCHEET/Credit_Risk_Analysis/blob/main/Resources/05-smote_class_report.png?raw=true)
 
@@ -71,14 +65,14 @@ Balanced Accuracy: 0.513
 
 The balanced accuracy score for this model was 0.644, which means that 35.6% of classes are incorrect and 64.4% are correct.
 
-An average precision score of 0.99 means the ClusterCentroid algorithm predicted positive class predictions 99% of the time on thie dataset.
+An average precision score of 0.99 means the ClusterCentroid algorithm predicted positive class predictions 99% of the time on the dataset.
 
-An average recall score of 0.46 means that 46% of class predictions made out of all positive examples in the dataset were correct, whereas 54% were incorrect.
+An average recall score of 0.46 means that 46% of class predictions made from all positive examples in the dataset were correct, whereas 54% were incorrect.
 
 
 ### Combination Sampling
 #### SMOTEENN
-The SMOTEENN algorithm is a combination of SMOTE and Edited Nearest Neighbor (ENN) algorithms.  In simple terms, SMOTEENN randomly oversamples the minority class (high_risk) and undersamples the majority class (low_risk) 
+The SMOTEENN algorithm is a combination of SMOTE and Edited Nearest Neighbor (ENN) algorithms.  In simple terms, SMOTEENN randomly oversamples the minority class (high_risk) and undersamples the majority class (low_risk).  Random_state was set to 1 for the analysis, but in the module it is set at zero, not sure about the difference between other sampling techniques.
 
 Once the data were balanced and trained, the SMOTEEN algorithm gave the following scores:
 
@@ -95,7 +89,7 @@ An average recall score of 0.59 means that 59% of class predictions made out of 
 
 ### Ensemble Learners
 #### Balanced Random Forest Classifier
-The Balanced Random Forest Classifier is an ensemble method where each tree in the ensemble is built from a sample drawn with replacement (bootstrap sample) from the training set. Instead of using all the features, a random subset of features is selected,  which further randomizes the tree.  As a result, the bias of the forest increases slightly, but since the less correlated trees are averaged, its variance decreases, which results in an overall better model.
+The Balanced Random Forest Classifier is an ensemble method where each tree in the ensemble is built from a sample drawn with replacement (bootstrap sample) from the training set. Instead of using all the features, a random subset of features is selected, which further randomizes the tree.  As a result, the bias of the forest increases slightly, but since the less correlated trees are averaged, its variance decreases, which results in an overall better model.
 
 Once the data were balanced and trained, the balanced random forest algorithm gave the following scores:
 
@@ -107,7 +101,7 @@ This algorithm's balanced accuracy score is 0.788, which means nearly 79% of cla
 
 Balanced Random Forest's average precision score of 0.99 means that this algorithm predicted positive class predictions 99% of the time on this dataset.
 
-An average recall score of 0.91 means that 91% of class predictions made out of all positive examples in this dataset were correct, where as 9% were incorrect.
+An average recall score of 0.91 means that 91% of class predictions made out of all positive examples in this dataset were correct, whereas 9% were incorrect.
 
 
 #### Easy Ensemble AdaBoost Classifier
@@ -119,14 +113,14 @@ Balanced Accuracy: 0.672
 
 ![09-easy_ensamble_class_report](https://github.com/ASCHEET/Credit_Risk_Analysis/blob/main/Resources/09-easy_ensamble_class_report.png?raw=true)
 
-Easy Ensemble AdaBoost Classifier's accuracy score of 0.925 means that its predictions were correct 92.5% of the time and 7.5% were incorrect.
+Easy Ensemble Classifier's accuracy score of 0.925 means that its predictions were correct 92.5% of the time and 7.5% were incorrect.
 
 This algorithm's precision score of 0.99 means that it predicted positive class predictions 99% of the time on this dataset.
 
-The average recall score of 0.94 means that 94% of class predictions made out of all positive examples in this dataset were correct.  
+The average recall score of 0.94 means that 94% of class predictions made from all positive examples in this dataset were correct.  
 
 
 ## Summary
 The oversampling, undersampling, and combination sampling algorithms' performance were relatively the same. Balanced Random Forest Classifier had a higher balanced accuracy score than the previous algorithms tested, but it was not good enough for predicting credit risk.
 
-Out of the six supervised machine learning algorithms tested, Easy Ensemble AdaBoost CLassifier performed the best overall.  It had a balanced accuracy score, along with high precision and recall scores.  It also had a high specificity score, which means this algorithm correctly determined actual negatives 91% of the time, and a high F1 score.  This means the harmonic mean of precision and recall were 0.97 out of 1.0.
+Out of the six supervised machine learning algorithms tested, Easy Ensemble Classifier performed the best overall.  It had a balanced accuracy score, along with high precision and recall scores.  It also had a high specificity score, which means this algorithm correctly determined actual negatives 91% of the time, and a high F1 score.  This means the harmonic mean of precision and recall were 0.97 out of 1.0.
