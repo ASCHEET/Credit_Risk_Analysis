@@ -1,7 +1,9 @@
 # Credit_Risk_Analysis
 
 ## Overview
-Data analysts were asked to examine credit card data from peer-to-peer lending services company LendingClub in order to determine credit risk. Supervised machine learning was employed to find out which model would perform the best against an unbalanced dataset. Data analysts trained and evaluated several models to predict credit risk. 
+Credit risk is an inherently unbalanced classification problem, as good loans easily outnumber risky loans. Therefore, different techniques to train and evaluate models with unbalanced classes. Use imbalanced-learn and scikit-learn libraries to build and evaluate models using resampling.
+
+Using the credit card credit dataset from LendingClub, a peer-to-peer lending services company, oversample the data using the RandomOverSampler and SMOTE algorithms, and undersample the data using the ClusterCentroids algorithm. Then, a combinatorial approach of over- and undersampling using the SMOTEENN algorithm. Next, compare two new machine learning models that reduce bias, 'BalancedRandomForestClassifier' and 'EasyEnsembleClassifier', to predict credit risk. Evaluate the performance of these models and provide a written recommendation on whether they should be used to predict credit risk.
 
 ## Results
 Credit card data was cleaned prior to implementing machine learning techniques.  Null columns and rows were dropped, interest rates were converted to numerical values, and target (y-axis) columns were converted to low_risk and high_risk based on their values.
