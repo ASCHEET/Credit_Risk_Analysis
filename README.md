@@ -12,11 +12,11 @@ Once the data was cleaned, it was split into training and testing categories, wh
 - y_train
 - y_test
 
-A random_state of 1 was used across all models to ensure reproducible output except for the SMOTEENN
+A random_state of 1 was used across all models to ensure reproducible.
 
 The balance of low_risk and high_risk is unbalanced, but this was expected as credit risk is an inherently unbalanced classification problem, since good loans easily outnumber risky loans.
 
-![01-dataset]()
+![01-dataset](https://github.com/ASCHEET/Credit_Risk_Analysis/blob/main/Resources/01-Balance%20of%20Dataset.png?raw=true)
 
 ### Oversampling Algorithms
 #### Naive Random Oversampling
@@ -24,7 +24,7 @@ In this model, instances of the high_risk class were oversampled, which is where
 
 Unbalanced                |  Balanced
 :------------------------:|:-------------------------:
-![02-unbalanced]()|![03-balanced]()
+![02-unbalanced](https://github.com/ASCHEET/Credit_Risk_Analysis/blob/main/Resources/02-Unbalanced.png?raw=true)|![03-balanced](https://github.com/ASCHEET/Credit_Risk_Analysis/blob/main/Resources/03-Balanced.png?raw=true)
 
 Once the datasets were balanced, the model trained the data, which is where the algorithm analyzes the data and attempts to learn patterns in the data.
 
@@ -32,7 +32,7 @@ Naive random oversampling on this data gave the following scores:
 
 Balanced Accuracy: 0.6287
 
-![04-imbalanced_class_report]()
+![04-imbalanced_class_report](https://github.com/ASCHEET/Credit_Risk_Analysis/blob/main/Resources/04-imbalanced_class_report.png?raw=true)
 
 A balanced accuracy score of 0.6287 means that 37.1% of classes are incorrect and 62.9% are correct.
 
@@ -48,7 +48,7 @@ Once the data were balanced and trained, SMOTE oversampling gave the following s
 
 Balanced Accuracy: 0.612
 
-![05-smote_class_report]()
+![05-smote_class_report](https://github.com/ASCHEET/Credit_Risk_Analysis/blob/main/Resources/05-smote_class_report.png?raw=true)
 
 The balanced accuracy score for this model means that 61.2% of classes are correct and 38.8% are incorrect.
 
@@ -67,7 +67,7 @@ Once the data were balanced and trained, ClusterCentroids undersampling gave the
 
 Balanced Accuracy: 0.513
 
-![06-ccluster_class_report]()
+![06-ccluster_class_report](https://github.com/ASCHEET/Credit_Risk_Analysis/blob/main/Resources/06-ccluster_class_report.png?raw=true)
 
 The balanced accuracy score for this model was 0.644, which means that 35.6% of classes are incorrect and 64.4% are correct.
 
@@ -84,7 +84,7 @@ Once the data were balanced and trained, the SMOTEEN algorithm gave the followin
 
 Balanced Accuracy: 0.644
 
-![07-smoteenn_class_report]()
+![07-smoteenn_class_report](https://github.com/ASCHEET/Credit_Risk_Analysis/blob/main/Resources/07-smoteenn_class_report.png?raw=true)
 
 SMOTEENN's balanced accuracy score was 0.644, which means 64.4% of class predictions were correct and 35.6% were incorrect.
 
@@ -101,7 +101,7 @@ Once the data were balanced and trained, the balanced random forest algorithm ga
 
 Balanced Accuracy: 0.788
 
-![08-randomf_class_report]()
+![08-randomf_class_report](https://github.com/ASCHEET/Credit_Risk_Analysis/blob/main/Resources/08-randomf_class_report.png?raw=true)
 
 This algorithm's balanced accuracy score is 0.788, which means nearly 79% of class predictions were correct and 21% were incorrect.
 
@@ -117,7 +117,7 @@ Once the data were balanced and trained, the Easy Ensemble AdaBoost Classifier a
 
 Balanced Accuracy: 0.672
 
-![09-easy_ensamble_class_report]()
+![09-easy_ensamble_class_report](https://github.com/ASCHEET/Credit_Risk_Analysis/blob/main/Resources/09-easy_ensamble_class_report.png?raw=true)
 
 Easy Ensemble AdaBoost Classifier's accuracy score of 0.925 means that its predictions were correct 92.5% of the time and 7.5% were incorrect.
 
