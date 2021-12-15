@@ -24,7 +24,7 @@ Unbalanced                |  Balanced
 :------------------------:|:-------------------------:
 ![02-unbalanced](https://github.com/ASCHEET/Credit_Risk_Analysis/blob/main/Resources/02-Unbalanced.png?raw=true)|![03-balanced](https://github.com/ASCHEET/Credit_Risk_Analysis/blob/main/Resources/03-Balanced.png?raw=true)
 
-Once the datasets were balanced, the model trained the data, which is where the algorithm analyzes the data and attempts to learn patterns in the data.
+Once the datasets were balanced, the model trained the data, the algorithm analyzed the data and attempts to learn patterns in the data.
 
 Naive random oversampling on this data gave the following scores: Balanced Accuracy: 0.6287
 
@@ -38,7 +38,7 @@ An average recall score of 0.64 means that this model quantified the number of p
 
 
 #### SMOTE Oversampling
-In the Synthetic Minority Oversampling Technique (SMOTE) oversampling model, the minority class (high_risk) are duplicated prior to fitting the model.  This can balanced class distribution, but does not provide any additional information to the model.  SMOTE selects data points that are close in the feature space, drawing a line between the points in the feature space, and drawing a new sample at a point along that line.  Realistic data from high_risk are created, which are relatively close to existing data from high_risk.
+The synthetic minority oversampling technique (SMOTE) is another oversampling approach to deal with unbalanced datasets. In SMOTE, like random oversampling, the size of the minority (high_risk) is increased. The key difference between the two lies in how the minority class is increased in size. As we have seen, in random oversampling, instances from the minority class are randomly selected and added to the minority class. In SMOTE, by contrast, new instances are interpolated. That is, for an instance from the minority class, a number of its closest neighbors is chosen. Based on the values of these neighbors, new values are created.
 
 Once the data was balanced and trained, SMOTE oversampling gave the following scores:  Balanced Accuracy: 0.612
 
@@ -50,12 +50,13 @@ An average precision score of 0.99 means that this model predicted positive clas
 
 An average recall score of 0.68 means that 68% of class predictions made out of all positive examples in the dataset were correct and 32% were incorrect.
 
-Comparing the performance of the naive random oversampling and SMOTE oversampling models, they appeared to perform about the same.
+Comparing the performance of the naive random oversampling and SMOTE oversampling models, they appeared to perform about the same.  It's important to note that although SMOTE reduces the risk of oversampling, it does not always outperform random oversampling.  Another deficiency of SMOTE is its vulnerability to outliers. We said earlier that a minority class instance is selected, and new values are generated based on its distance from its neighbors. If the neighbors are extreme outliers, the new values will reflect this. Finally, keep in mind that sampling techniques cannot overcome the deficiencies of the original dataset!
 
 
 ### Undersampling Algorithm
 #### ClusterCentroids
-The ClusterCentroid algorithm provides an efficient way to represent the data cluster with a reduced number of samples.  A cluster is a group of data points grouped together because of certain similarities.  This algorithm does this by performing K-means clustering on the majority class, low_risk, and then creates new data points which are averages of the coordinates of the generated clusters.
+
+Cluster centroid undersampling is akin to SMOTE. The algorithm identifies clusters of the majority class, then generates synthetic data points, called centroids, that are representative of the clusters. The majority class is then undersampled down to the size of the minority class.
 
 Once the data were balanced and trained, ClusterCentroids undersampling gave the following scores: Balanced Accuracy: 0.513
 
@@ -65,12 +66,17 @@ The balanced accuracy score for this model was 0.513, which means that 48.7% of 
 
 An average precision score of 0.99 means the ClusterCentroid algorithm predicted positive class predictions 99% of the time on the dataset.
 
-An average recall score of 0.46 means that 46% of class predictions made from all positive examples in the dataset were correct, whereas 54% were incorrect.
+An average recall score of 0.46 means that 46% of class predictions made from all positive examples in the dataset were correct, whereas 54% were incorrect.  These results are worse than those from random undersampling! This underscores an important point: While resampling can attempt to address imbalance, it does not guarantee better results.
 
 
 ### Combination Sampling
 #### SMOTEENN
-The SMOTEENN algorithm is a combination of SMOTE and Edited Nearest Neighbor (ENN) algorithms.  In simple terms, SMOTEENN randomly oversamples the minority class (high_risk) and undersamples the majority class (low_risk).  Random_state was set to 1 for the analysis, but in the module it is set at zero, not sure about the difference between other sampling techniques.
+As previously discussed, a downside of oversampling with SMOTE is its reliance on the immediate neighbors of a data point. Because the algorithm doesn't see the overall distribution of data, the new data points it creates can be heavily influenced by outliers. This can lead to noisy data. With downsampling, the downsides are that it involves loss of data and is not an option when the dataset is small. One way to deal with these challenges is to use a sampling strategy that is a combination of oversampling and undersampling.
+
+SMOTEENN combines the SMOTE and Edited Nearest Neighbors (ENN) algorithms. SMOTEENN is a two-step process:
+
+	1. Oversample the minority class with SMOTE.
+	2. Clean the resulting data with an undersampling strategy. If the two nearest neighbors of a data point belong to two different classes, that data point is dropped.
 
 Once the data were balanced and trained, the SMOTEEN algorithm gave the following scores: Balanced Accuracy: 0.622
 
@@ -85,7 +91,15 @@ An average recall score of 0.57 means that 57% of class predictions made out of 
 
 ### Ensemble Learners
 #### Balanced Random Forest Classifier
-The Balanced Random Forest Classifier is an ensemble method where each tree in the ensemble is built from a sample drawn with replacement (bootstrap sample) from the training set. Instead of using all the features, a random subset of features is selected, which further randomizes the tree.  As a result, the bias of the forest increases slightly, but since the less correlated trees are averaged, its variance decreases, which results in an overall better model.
+These simple trees are weak learners because they are created by randomly sampling the data and creating a decision tree for only that small portion of data. And since they are trained on a small piece of the original data, they are only slightly better than a random guess. However, many slightly better than average small decision trees can be combined to create a strong learner, which has much better decision-making power.
+
+Random forest algorithms are beneficial because they:
+
+	* Are robust against overfitting as all of those weak learners are trained on different pieces of the data.
+	* Can be used to rank the importance of input variables in a natural way.
+	 *Can handle thousands of input variables without variable deletion.
+	* Are robust to outliers and nonlinear data.
+	* Run efficiently on large datasets.
 
 Once the data were balanced and trained, the balanced random forest algorithm gave the following scores: Balanced Accuracy: 0.788
 
@@ -99,7 +113,7 @@ An average recall score of 0.91 means that 91% of class predictions made out of 
 
 
 #### Easy Ensemble AdaBoost Classifier
-The Easy Ensemble AdaBoost Classifier combine multiple weak or low accuracy models to create a strong, accurate models.  This algorithm uses one-level decision trees as weak learners that are added to the ensemble sequentially.  This is an iterative process, so each subsequent model attempts to correct predictions made by the previous model in the sequence.
+The idea behind Adaptive Boosting, called AdaBoost, is easy to understand. In AdaBoost, a model is trained then evaluated. After evaluating the errors of the first model, another model is trained. This time, however, the model gives extra weight to the errors from the previous model. The purpose of this weighting is to minimize similar errors in subsequent models. Then, the errors from the second model are given extra weight for the third model. This process is repeated until the error rate is minimized.
 
 Once the data were balanced and trained, the Easy Ensemble AdaBoost Classifier algorithm gave the following scores: Balanced Accuracy: 0.925
 
@@ -115,4 +129,4 @@ The average recall score of 0.94 means that 94% of class predictions made from a
 ## Summary
 The oversampling, undersampling, and combination sampling algorithms' performance were relatively the same. Balanced Random Forest Classifier had a higher balanced accuracy score than the previous algorithms tested, but it was not good enough for predicting credit risk.
 
-Out of the six supervised machine learning algorithms tested, Easy Ensemble Classifier performed the best overall.  It had a balanced accuracy score, along with high precision and recall scores.  It also had a high specificity score, which means this algorithm correctly determined actual negatives 91% of the time, and a high F1 score.  This means the harmonic mean of precision and recall were 0.97 out of 1.0.
+Out of the six supervised machine learning algorithms tested, Easy Ensemble Classifier performed the best overall.  It had a balanced accuracy score, along with high precision and recall scores.  It also had a high specificity score, which means this algorithm correctly determined actual negatives 92.5% of the time, and a high F1 score.  This means the harmonic mean of precision and recall were 0.97 out of 1.0.
