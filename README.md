@@ -57,13 +57,11 @@ Comparing the performance of the naive random oversampling and SMOTE oversamplin
 #### ClusterCentroids
 The ClusterCentroid algorithm provides an efficient way to represent the data cluster with a reduced number of samples.  A cluster is a group of data points grouped together because of certain similarities.  This algorithm does this by performing K-means clustering on the majority class, low_risk, and then creates new data points which are averages of the coordinates of the generated clusters.
 
-Once the data were balanced and trained, ClusterCentroids undersampling gave the following scores:
-
-Balanced Accuracy: 0.513
+Once the data were balanced and trained, ClusterCentroids undersampling gave the following scores: Balanced Accuracy: 0.513
 
 ![06-ccluster_class_report](https://github.com/ASCHEET/Credit_Risk_Analysis/blob/main/Resources/06-ccluster_class_report.png?raw=true)
 
-The balanced accuracy score for this model was 0.644, which means that 35.6% of classes are incorrect and 64.4% are correct.
+The balanced accuracy score for this model was 0.513, which means that 48.7% of classes are incorrect and 51.3% are correct.
 
 An average precision score of 0.99 means the ClusterCentroid algorithm predicted positive class predictions 99% of the time on the dataset.
 
@@ -74,26 +72,22 @@ An average recall score of 0.46 means that 46% of class predictions made from al
 #### SMOTEENN
 The SMOTEENN algorithm is a combination of SMOTE and Edited Nearest Neighbor (ENN) algorithms.  In simple terms, SMOTEENN randomly oversamples the minority class (high_risk) and undersamples the majority class (low_risk).  Random_state was set to 1 for the analysis, but in the module it is set at zero, not sure about the difference between other sampling techniques.
 
-Once the data were balanced and trained, the SMOTEEN algorithm gave the following scores:
-
-Balanced Accuracy: 0.644
+Once the data were balanced and trained, the SMOTEEN algorithm gave the following scores: Balanced Accuracy: 0.622
 
 ![07-smoteenn_class_report](https://github.com/ASCHEET/Credit_Risk_Analysis/blob/main/Resources/07-smoteenn_class_report.png?raw=true)
 
-SMOTEENN's balanced accuracy score was 0.644, which means 64.4% of class predictions were correct and 35.6% were incorrect.
+SMOTEENN's balanced accuracy score was 0.622, which means 62.2% of class predictions were correct and 37.8% were incorrect.
 
 An average precision score of 0.99 means the SMOTEENN algorithm predicted positive class predictions 99% of the time on this dataset.
 
-An average recall score of 0.59 means that 59% of class predictions made out of all positive examples in the dataset were correct, whereas 41% were incorrect.
+An average recall score of 0.57 means that 57% of class predictions made out of all positive examples in the dataset were correct, whereas 43% were incorrect.
 
 
 ### Ensemble Learners
 #### Balanced Random Forest Classifier
 The Balanced Random Forest Classifier is an ensemble method where each tree in the ensemble is built from a sample drawn with replacement (bootstrap sample) from the training set. Instead of using all the features, a random subset of features is selected, which further randomizes the tree.  As a result, the bias of the forest increases slightly, but since the less correlated trees are averaged, its variance decreases, which results in an overall better model.
 
-Once the data were balanced and trained, the balanced random forest algorithm gave the following scores:
-
-Balanced Accuracy: 0.788
+Once the data were balanced and trained, the balanced random forest algorithm gave the following scores: Balanced Accuracy: 0.788
 
 ![08-randomf_class_report](https://github.com/ASCHEET/Credit_Risk_Analysis/blob/main/Resources/08-randomf_class_report.png?raw=true)
 
@@ -107,9 +101,7 @@ An average recall score of 0.91 means that 91% of class predictions made out of 
 #### Easy Ensemble AdaBoost Classifier
 The Easy Ensemble AdaBoost Classifier combine multiple weak or low accuracy models to create a strong, accurate models.  This algorithm uses one-level decision trees as weak learners that are added to the ensemble sequentially.  This is an iterative process, so each subsequent model attempts to correct predictions made by the previous model in the sequence.
 
-Once the data were balanced and trained, the Easy Ensemble AdaBoost Classifier algorithm gave the following scores:
-
-Balanced Accuracy: 0.672
+Once the data were balanced and trained, the Easy Ensemble AdaBoost Classifier algorithm gave the following scores: Balanced Accuracy: 0.925
 
 ![09-easy_ensamble_class_report](https://github.com/ASCHEET/Credit_Risk_Analysis/blob/main/Resources/09-easy_ensamble_class_report.png?raw=true)
 
